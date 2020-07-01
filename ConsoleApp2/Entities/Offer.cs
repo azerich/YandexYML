@@ -1,5 +1,7 @@
 ﻿using ConsoleApp2.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
@@ -8,7 +10,15 @@ namespace ConsoleApp2.Entities
     [XmlRoot("offer")]
     public class Offer
     {
-        public Offer() { }
+        private static List<string> publicProperties;
+        public Offer()
+        {
+            publicProperties = typeof(Offer)
+                .GetProperties()
+                .Where(x => x.GetMethod.IsPublic)
+                .Select(x => x.Name)
+                .ToList();
+        }
 
         private object[] itemsField;
         private ItemsChoiceType[] itemsElementNameField;
@@ -17,6 +27,19 @@ namespace ConsoleApp2.Entities
         private int bidField;
         private int cbidField;
         private bool availableField;
+
+        [XmlAttribute("id")]
+        public int Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
 
         [XmlElement("ISBN", typeof(string))]
         [XmlElement("artist", typeof(string))]
@@ -98,19 +121,6 @@ namespace ConsoleApp2.Entities
             }
         }
 
-        [XmlAttribute("id")]
-        public int Id
-        {
-            get
-            {
-                return this.idField;
-            }
-            set
-            {
-                this.idField = value;
-            }
-        }
-
         [XmlAttribute("type")]
         public string Type
         {
@@ -171,6 +181,11 @@ namespace ConsoleApp2.Entities
             {
                 this.availableField = value;
             }
+        }
+
+        public IEnumerable<string> GetPublicProperties()
+        {
+            return publicProperties;
         }
     }
 }
