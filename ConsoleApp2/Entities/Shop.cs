@@ -1,12 +1,13 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
 {
-    [System.Serializable()]
-    [System.ComponentModel.DesignerCategory("code")]
-    [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    [Serializable]
     public partial class Shop
     {
+        public Shop() { }
 
         private string nameField;
 
@@ -18,7 +19,7 @@ namespace ConsoleApp2.Entities
 
         private Category[] categoriesField;
 
-        private ushort localDeliveryCostField;
+        private int localDeliveryCostField;
 
         private Offer[] offersField;
 
@@ -61,8 +62,8 @@ namespace ConsoleApp2.Entities
             }
         }
 
-        [XmlElement("currencies")]
-        [XmlArrayItem("currency", IsNullable =false)]
+        [XmlArray("currencies")]
+        [XmlArrayItem("currency", typeof(Currency))]
         public Currency[] Currencies
         {
             get
@@ -75,8 +76,8 @@ namespace ConsoleApp2.Entities
             }
         }
 
-        [XmlElement("categories")]
-        [XmlArrayItem("category", IsNullable = false)]
+        [XmlArray("categories")]
+        [XmlArrayItem("category", typeof(Category))]
         public Category[] Categories
         {
             get
@@ -90,7 +91,7 @@ namespace ConsoleApp2.Entities
         }
 
         [XmlElement("local_delivery_cost")]
-        public ushort LocalDeliveryCost
+        public int LocalDeliveryCost
         {
             get
             {
@@ -101,8 +102,9 @@ namespace ConsoleApp2.Entities
                 this.localDeliveryCostField = value;
             }
         }
-        [XmlElement("offers")]
-        [XmlArrayItem("offer", IsNullable = false)]
+        
+        [XmlArray("offers")]
+        [XmlArrayItem("offer", typeof(Offer))]
         public Offer[] Offers
         {
             get

@@ -5,16 +5,15 @@ namespace ConsoleApp2.Entities
 {
     [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]
-    [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(ElementName = "category", Namespace = "", IsNullable = false)]
     public partial class Category
     {
+        public Category() { }
+
 
         private byte idField;
-
         private byte parentIdField;
-
-        private bool parentIdFieldSpecified;
-
         private string valueField;
 
         [XmlAttribute("id")]
@@ -48,11 +47,8 @@ namespace ConsoleApp2.Entities
         {
             get
             {
-                return this.parentIdFieldSpecified;
-            }
-            set
-            {
-                this.parentIdFieldSpecified = value;
+                if (ParentId != 0) return true;
+                else return false;
             }
         }
 

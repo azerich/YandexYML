@@ -4,26 +4,18 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
 {
-    [Serializable()]
-    [System.ComponentModel.DesignerCategory("code")]
-    [System.Xml.Serialization.XmlType(AnonymousType = true)]
-    public partial class Offer
+    [Serializable]
+    [XmlRoot("offer")]
+    public class Offer
     {
+        public Offer() { }
 
         private object[] itemsField;
-
         private ItemsChoiceType[] itemsElementNameField;
-
-        private ushort idField;
-
+        private int idField;
         private string typeField;
-
-        private byte bidField;
-
-        private byte cbidField;
-
-        private bool cbidFieldSpecified;
-
+        private int bidField;
+        private int cbidField;
         private bool availableField;
 
         [XmlElement("ISBN", typeof(string))]
@@ -107,7 +99,7 @@ namespace ConsoleApp2.Entities
         }
 
         [XmlAttribute("id")]
-        public ushort Id
+        public int Id
         {
             get
             {
@@ -133,7 +125,7 @@ namespace ConsoleApp2.Entities
         }
 
         [XmlAttribute("bid")]
-        public byte Bid
+        public int Bid
         {
             get
             {
@@ -146,7 +138,7 @@ namespace ConsoleApp2.Entities
         }
 
         [XmlAttribute("cbid")]
-        public byte CBid
+        public int CBid
         {
             get
             {
@@ -163,11 +155,8 @@ namespace ConsoleApp2.Entities
         {
             get
             {
-                return this.cbidFieldSpecified;
-            }
-            set
-            {
-                this.cbidFieldSpecified = value;
+                if (CBid != 0) return true;
+                else return false;
             }
         }
 

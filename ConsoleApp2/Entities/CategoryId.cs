@@ -1,41 +1,15 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
 {
-    [Serializable()]
-    [System.ComponentModel.DesignerCategory("code")]
-    [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    [XmlRoot("categoryId")]
     public partial class CategoryId
     {
+        [XmlAttribute("type")]
+        public string Type { get; set; }
 
-        private string typeField;
-
-        private byte valueField;
-
-        [System.Xml.Serialization.XmlAttribute("type")]
-        public string Type
-        {
-            get
-            {
-                return this.typeField;
-            }
-            set
-            {
-                this.typeField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlText()]
-        public byte Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
+        [XmlText()]
+        public byte Value { get; set; }
     }
 }

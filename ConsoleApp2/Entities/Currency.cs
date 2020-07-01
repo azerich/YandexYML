@@ -6,8 +6,11 @@ namespace ConsoleApp2.Entities
     [Serializable()]
     [System.ComponentModel.DesignerCategory("code")]
     [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    [XmlRoot(ElementName = "currency", Namespace = "", IsNullable = false)]
     public partial class Currency
     {
+        public Currency() { }
+
 
         private string idField;
 
