@@ -1,15 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
 {
-    public class Currency
+    [Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    public partial class Currency
     {
-        public string Id { get; set; }
-        public int Rate { get; set; }
-        public int Plus { get; set; }
+
+        private string idField;
+
+        private byte rateField;
+
+        private byte plusField;
+
+        [XmlAttribute("id")]
+        public string Id
+        {
+            get
+            {
+                return this.idField;
+            }
+            set
+            {
+                this.idField = value;
+            }
+        }
+
+        [XmlAttribute("rate")]
+        public byte Rate
+        {
+            get
+            {
+                return this.rateField;
+            }
+            set
+            {
+                this.rateField = value;
+            }
+        }
+
+        [XmlAttribute("plus")]
+        public byte Plus
+        {
+            get
+            {
+                return this.plusField;
+            }
+            set
+            {
+                this.plusField = value;
+            }
+        }
     }
 }

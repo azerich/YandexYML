@@ -1,35 +1,118 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml.Serialization;
 
 namespace ConsoleApp2.Entities
 {
-    public class Shop
+    [System.Serializable()]
+    [System.ComponentModel.DesignerCategory("code")]
+    [System.Xml.Serialization.XmlType(AnonymousType = true)]
+    public partial class Shop
     {
-        [Required]
-        [Key]
-        public string Name { get; set; }
-        [Required]
-        public string Company { get; set; }
-        [Required]
-        public Uri Url { get; set; }
-        public string Platform { get; set; }
-        public string Version { get; set; }
-        public string Agency { get; set; }
-        public string Email { get; set; }
-        [Required]
-        public List<Currency> Currencies { get; set; }
-        [Required]
-        public List<Category> Categories { get; set; }
-        public List<ShopOptions> DeliveryOptions { get; set; }
-        public List<ShopOptions> PickupOptions { get; set; }
-        public bool EnableAutoDiscounts { get; set; }
-        [Required]
-        public List<Offer> Offers { get; set; }
-        public List<Gift> Gifts { get; set; }
-        public List<Promo> Promos { get; set; }
+
+        private string nameField;
+
+        private string companyField;
+
+        private string urlField;
+
+        private Currency[] currenciesField;
+
+        private Category[] categoriesField;
+
+        private ushort localDeliveryCostField;
+
+        private Offer[] offersField;
+
+        [XmlElement("name")]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        [XmlElement("company")]
+        public string Company
+        {
+            get
+            {
+                return this.companyField;
+            }
+            set
+            {
+                this.companyField = value;
+            }
+        }
+        
+        [XmlElement("url")]
+        public string Url
+        {
+            get
+            {
+                return this.urlField;
+            }
+            set
+            {
+                this.urlField = value;
+            }
+        }
+
+        [XmlElement("currencies")]
+        [XmlArrayItem("currency", IsNullable =false)]
+        public Currency[] Currencies
+        {
+            get
+            {
+                return this.currenciesField;
+            }
+            set
+            {
+                this.currenciesField = value;
+            }
+        }
+
+        [XmlElement("categories")]
+        [XmlArrayItem("category", IsNullable = false)]
+        public Category[] Categories
+        {
+            get
+            {
+                return this.categoriesField;
+            }
+            set
+            {
+                this.categoriesField = value;
+            }
+        }
+
+        [XmlElement("local_delivery_cost")]
+        public ushort LocalDeliveryCost
+        {
+            get
+            {
+                return this.localDeliveryCostField;
+            }
+            set
+            {
+                this.localDeliveryCostField = value;
+            }
+        }
+        [XmlElement("offers")]
+        [XmlArrayItem("offer", IsNullable = false)]
+        public Offer[] Offers
+        {
+            get
+            {
+                return this.offersField;
+            }
+            set
+            {
+                this.offersField = value;
+            }
+        }
     }
 }
